@@ -7,6 +7,7 @@
 """
 
 from sniff.common import CommonSniffApi
+from sniff.linux import LinuxSniffApi
 
 
 message_queue = {
@@ -37,18 +38,33 @@ items_mapper = {
         "comment": "获取主机对应接口的IP作为host id，特殊用途，不应被配置为监控项",
     },
     "1001": {
-        "func": CommonSniffApi.get_uptime,
-        "args": "",
-        "comment": "获取启动时间",
-    },
-    "1002": {
         "func": CommonSniffApi.get_cpu_percent,
         "args": "",
         "comment": "获取CPU占用百分比",
     },
-    "1003": {
+    "1002": {
         "func": CommonSniffApi.get_memory_percent,
         "args": "",
         "comment": "获取内存占用百分比",
+    },
+    "2001": {
+        "func": LinuxSniffApi.get_gpu_mem,
+        "args": "0",
+        "comment": "获取GPU 0的显存",
+    },
+    "2002": {
+        "func": LinuxSniffApi.get_gpu_mem,
+        "args": "1",
+        "comment": "获取GPU 1的显存",
+    },
+    "2003": {
+        "func": LinuxSniffApi.get_gpu_mem,
+        "args": "2",
+        "comment": "获取GPU 2的显存",
+    },
+    "2004": {
+        "func": LinuxSniffApi.get_gpu_mem,
+        "args": "3",
+        "comment": "获取GPU 3的显存",
     },
 }

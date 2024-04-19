@@ -24,7 +24,8 @@ args.add_argument(
 args.add_argument(
     "--task_name",
     type=str,
-    required=True,
+    default="test_task",
+    required=False,
     help="在 config/tasks 下配置的任务集合名称",
 )
 

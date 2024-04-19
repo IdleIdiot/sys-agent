@@ -206,9 +206,10 @@ class LinuxSniffApi:
         return net_in, net_out  # Kbps
 
     @classmethod
-    def get_vip(cls, vip):
-        cmd = "/usr/sbin/ip addr | grep %s | wc -l" % vip
+    def get_gpu_mem(cls, gpu_id):
+        cmd = "nvidia-smi --query-gpu=index,name,memory.used,memory.total --format=noheader,csv | awk -F',' '{printf \"GPU %s  %s  %s\n\", $1, $3, $4}'"
         ps = subprocess.Popen(
             cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
         )
         output = ps.communicate()[0].split()[0]
+        print(output)

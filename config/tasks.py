@@ -10,7 +10,7 @@ test_task = {
         "template": message_template["process"],
     },
     "resource": {
-        "items": ["1001", "1002", "1003"],
+        "items": ["1001", "1002"],
         "template": message_template["resource"],
     },
 }
