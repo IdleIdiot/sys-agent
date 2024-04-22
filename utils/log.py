@@ -7,7 +7,7 @@ from logging.handlers import TimedRotatingFileHandler
 
 
 class FileLogger:
-    def __init__(self, name, level=logging.DEBUG):
+    def __init__(self, name, level=logging.INFO):
         self.logger = logging.getLogger(name)
         self.logger.setLevel(level)
 

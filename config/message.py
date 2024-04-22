@@ -5,6 +5,7 @@ message_template = {
         "agent_time": "",
         "value1": "",
         "log_info": "",
+        "alias": "",
     },
     "process": {
         "host_id": "",
@@ -13,12 +14,14 @@ message_template = {
         "pid": "",
         "cpu": "",
         "mem": "",
+        "alias": "",
     },
     "resource": {
         "host_id": "",
         "item_id": "",
         "agent_time": "",
         "value1": "",
+        "alias": "",
     },
 }
 
@@ -38,6 +41,9 @@ message_mapping = {
                 },
                 "value1": {
                     "type": "long",
+                },
+                "alias": {
+                    "type": "text",
                 },
             },
         }
@@ -65,6 +71,9 @@ message_mapping = {
                     "type": "long",
                 },
                 "log_info": {
+                    "type": "text",
+                },
+                "alias": {
                     "type": "text",
                 },
             }
@@ -97,6 +106,9 @@ message_mapping = {
                 },
                 "mem": {
                     "type": "long",
+                },
+                "alias": {
+                    "type": "text",
                 },
             }
         }

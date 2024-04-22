@@ -58,6 +58,8 @@ class Agent:
                 message["item_id"] = item
                 # message["index_name"] = task_type
                 message["agent_time"] = cur_time
+                message["alias"] = self.items_mapper[item]["alias"]
+                logger.info(message["alias"])
 
                 executor = self.items_mapper[item]
                 if executor["args"] == "":

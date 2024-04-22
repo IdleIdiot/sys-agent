@@ -1,5 +1,6 @@
 import re
 import time
+import math
 import subprocess
 
 
@@ -207,9 +208,26 @@ class LinuxSniffApi:
 
     @classmethod
     def get_gpu_mem(cls, gpu_id):
-        cmd = "nvidia-smi --query-gpu=index,name,memory.used,memory.total --format=noheader,csv | awk -F',' '{printf \"GPU %s  %s  %s\n\", $1, $3, $4}'"
-        ps = subprocess.Popen(
+        cmd = """
+        nvidia-smi --query-gpu=index,name,memory.used,memory.total --format=noheader,csv | awk -F',' '{printf "GPU %s  %s  %s |", $1, $3, $4}'
+        """
+        result = subprocess.run(
             cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
         )
-        output = ps.communicate()[0].split()[0]
-        print(output)
+        outputs = result.stdout.decode("utf-8").split("|")
+        for output in outputs:
+            if f"GPU {gpu_id}" in output:
+                gpu_info = (
+                    output.replace(" MiB", "")
+                    .replace(f"GPU {gpu_id}", "")
+                    .replace("'", "")
+                )
+        used_mem, total_mem = gpu_info.split()
+        percent_gpu_mem_used = round(float(used_mem) / float(total_mem), 2) * 100
+
+        return {"value1": percent_gpu_mem_used}
+
+
+if __name__ == "__main__":
+    result = LinuxSniffApi.get_gpu_mem(0)
+    print(result)

@@ -34,37 +34,37 @@ database = {
 items_mapper = {
     "1000": {
         "func": CommonSniffApi.get_ip_address,
-        "args": "WLAN",
-        "comment": "获取主机对应接口的IP作为host id，特殊用途，不应被配置为监控项",
+        "args": "ens2f0",
+        "alias": "host_id",
     },
     "1001": {
         "func": CommonSniffApi.get_cpu_percent,
         "args": "",
-        "comment": "获取CPU占用百分比",
+        "alias": "cpu_percent",
     },
     "1002": {
         "func": CommonSniffApi.get_memory_percent,
         "args": "",
-        "comment": "获取内存占用百分比",
+        "alias": "mem_percent",
     },
     "2001": {
         "func": LinuxSniffApi.get_gpu_mem,
         "args": "0",
-        "comment": "获取GPU 0的显存",
+        "alias": "gpu_0_mem",
     },
     "2002": {
         "func": LinuxSniffApi.get_gpu_mem,
         "args": "1",
-        "comment": "获取GPU 1的显存",
+        "alias": "gpu_1_mem",
     },
     "2003": {
         "func": LinuxSniffApi.get_gpu_mem,
         "args": "2",
-        "comment": "获取GPU 2的显存",
+        "alias": "gpu_2_mem",
     },
     "2004": {
         "func": LinuxSniffApi.get_gpu_mem,
         "args": "3",
-        "comment": "获取GPU 3的显存",
+        "alias": "gpu_3_mem",
     },
 }
