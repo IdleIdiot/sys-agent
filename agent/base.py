@@ -61,14 +61,17 @@ class Agent:
                 message["alias"] = self.items_mapper[item]["alias"]
                 logger.info(message["alias"])
 
-                executor = self.items_mapper[item]
-                if executor["args"] == "":
-                    rc = executor["func"]()
-                else:
-                    rc = executor["func"](executor["args"])
-                message.update(rc)
+                try:
+                    executor = self.items_mapper[item]
+                    if executor["args"] == "":
+                        rc = executor["func"]()
+                    else:
+                        rc = executor["func"](executor["args"])
+                    message.update(rc)
 
-                results[task_type].append(message)
+                    results[task_type].append(message)
+                except Exception as e:
+                    logger.warning(f"{item} value can't read.")
         # 写入消息队列
         logger.info(results)
         self.producer.send_data(results)
