@@ -67,4 +67,24 @@ items_mapper = {
         "args": "3",
         "alias": "gpu_3_mem",
     },
+    "2005": {
+        "func": LinuxSniffApi.get_gpu_power,
+        "args": "0",
+        "alias": "gpu_0_power",
+    },
+    "2006": {
+        "func": LinuxSniffApi.get_gpu_power,
+        "args": "1",
+        "alias": "gpu_1_power",
+    },
+    "2007": {
+        "func": LinuxSniffApi.get_gpu_power,
+        "args": "2",
+        "alias": "gpu_2_power",
+    },
+    "2008": {
+        "func": LinuxSniffApi.get_gpu_power,
+        "args": "3",
+        "alias": "gpu_3_power",
+    },
 }

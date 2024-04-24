@@ -233,6 +233,36 @@ class LinuxSniffApi:
             raise Exception(f"Not have gpu {gpu_id} in this machine")
         return {"value1": percent_gpu_mem_used}
 
+    @classmethod
+    def get_gpu_power(cls, gpu_id: str):
+        """
+        If gpu_id not exists, raise Exception.
+        """
+        percent_gpu_mem_used = None
+        cmd = (
+            "nvidia-smi --query-gpu=index,power.draw,power.limit --format=noheader,csv"
+        )
+        result = subprocess.run(
+            cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
+        )
+
+        outputs = result.stdout.decode("utf-8").split("\n")
+
+        for output in outputs:
+            if not output:
+                continue
+            output = output.split(",")
+
+            if gpu_id == output[0]:
+                used = float(output[1].replace(" W", ""))
+                total = float(output[2].replace(" W", ""))
+                percent_gpu_power_used = round(used / total, 2) * 100
+                print(percent_gpu_power_used)
+                break
+        if not percent_gpu_power_used:
+            raise Exception(f"Not have gpu {gpu_id} in this machine")
+        return {"value1": percent_gpu_power_used}
+
 
 if __name__ == "__main__":
-    LinuxSniffApi.get_gpu_mem("1")
+    LinuxSniffApi.get_gpu_power("1")
