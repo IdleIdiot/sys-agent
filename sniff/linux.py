@@ -208,26 +208,31 @@ class LinuxSniffApi:
 
     @classmethod
     def get_gpu_mem(cls, gpu_id):
-        cmd = """
-        nvidia-smi --query-gpu=index,name,memory.used,memory.total --format=noheader,csv | awk -F',' '{printf "GPU %s  %s  %s |", $1, $3, $4}'
         """
+        If gpu_id not exists, raise Exception.
+        """
+        percent_gpu_mem_used = None
+        cmd = "nvidia-smi --query-gpu=index,memory.used,memory.total --format=noheader,csv"
         result = subprocess.run(
             cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
         )
-        outputs = result.stdout.decode("utf-8").split("|")
-        for output in outputs:
-            if f"GPU {gpu_id}" in output:
-                gpu_info = (
-                    output.replace(" MiB", "")
-                    .replace(f"GPU {gpu_id}", "")
-                    .replace("'", "")
-                )
-        used_mem, total_mem = gpu_info.split()
-        percent_gpu_mem_used = round(float(used_mem) / float(total_mem), 2) * 100
 
+        outputs = result.stdout.decode("utf-8").split("\n")
+
+        for output in outputs:
+            if not output:
+                continue
+            output = output.split(",")
+
+            if gpu_id == output[0]:
+                used = float(output[1].replace(" MiB", ""))
+                total = float(output[2].replace(" MiB", ""))
+                percent_gpu_mem_used = round(used / total, 2) * 100
+                break
+        if not percent_gpu_mem_used:
+            raise Exception(f"Not have gpu {gpu_id} in this machine")
         return {"value1": percent_gpu_mem_used}
 
 
 if __name__ == "__main__":
-    result = LinuxSniffApi.get_gpu_mem(0)
-    print(result)
+    LinuxSniffApi.get_gpu_mem("1")
