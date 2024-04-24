@@ -227,7 +227,8 @@ class LinuxSniffApi:
             if gpu_id == output[0]:
                 used = float(output[1].replace(" MiB", ""))
                 total = float(output[2].replace(" MiB", ""))
-                percent_gpu_mem_used = round(used / total, 2) * 100
+                percent_gpu_mem_used = round(used / total, 4) * 100
+                print(percent_gpu_mem_used)
                 break
         if not percent_gpu_mem_used:
             raise Exception(f"Not have gpu {gpu_id} in this machine")
@@ -256,7 +257,7 @@ class LinuxSniffApi:
             if gpu_id == output[0]:
                 used = float(output[1].replace(" W", ""))
                 total = float(output[2].replace(" W", ""))
-                percent_gpu_power_used = round(used / total, 2) * 100
+                percent_gpu_power_used = round(used / total, 4) * 100
                 print(percent_gpu_power_used)
                 break
         if not percent_gpu_power_used:
@@ -265,4 +266,4 @@ class LinuxSniffApi:
 
 
 if __name__ == "__main__":
-    LinuxSniffApi.get_gpu_power("1")
+    LinuxSniffApi.get_gpu_mem("2")
