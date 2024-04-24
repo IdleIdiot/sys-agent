@@ -1,13 +1,19 @@
-## Environments
+## 1. Environments
 
-### Python(required)
+
+### 1.1 Python (required)
 python --version
+
 Python 3.9.19
 
 pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
-### Host ID(required)
+
+
+
+### 1.2 Host ID (required)
 vim config/settings.py
+
 Set 1000 item args to your server nic.
 
 "1000": {
@@ -16,29 +22,48 @@ Set 1000 item args to your server nic.
     "alias": "host_id",
 },
 
-### Database & MQ(Option|If no database then Required)
+
+
+
+### 1.3 Database & MQ (Option|If no database then Required)
 cat services.help
+
 Install docker at Data Server
+
 Run docker command
 
-#### Config
-** Modify Database & MQ Server IP **
+
+#### 1.3.1 Config
+**Modify Database & MQ Server IP**
+
 config/settings.py
 
-** Custom Agent Server Tasks. **
+**Custom Agent Server Tasks.**
+
 see: config/settings.py
+
 config/tasks.py   |  Add Item | Del Item
 
 
-#### If you want to increment item interface(Option)
+
+
+### 1.4 If you want to increment item interface (Option)
 Add interface at sniff/ directory.
+
 Config config/settings.py
+
 config/tasks.py   |  Add Item | Del Item
 
-## Run Demo
+
+
+
+## 2. Run Demo
 nohup python app.py &
 
 
-## Kill Process
+
+
+## 3. Kill Process
 ps -aux | grep app
+
 kill {pid}
