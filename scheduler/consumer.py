@@ -30,7 +30,6 @@ def callback(ch, method, properties, body: bytes):
 
     for index_name in wait_delete:
         client.delete_old_data(index_name=index_name)
-    # ch.basic_ack(delivery_tag=method.delivery_tag)
 
 
 class RabbitConsumer:
