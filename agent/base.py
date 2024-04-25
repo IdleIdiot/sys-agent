@@ -31,18 +31,6 @@ class Agent:
         """
         results = {}
 
-        # test
-        # 获取当前时间的时间戳（秒级别）
-        # current_timestamp_seconds = time.time()
-
-        # 将时间戳转换为毫秒级别
-        # current_timestamp_milliseconds = current_timestamp_seconds
-
-        # 打印结果
-        # cur_time = int(current_timestamp_milliseconds)
-
-        ##
-
         cur_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
         logger.debug(self.tasks)

@@ -34,3 +34,14 @@ def execute_shell(cmd):
 
 def get_project_root():
     return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+def singleton(cls):
+    instances = {}
+
+    def wrapper(*args, **kwargs):
+        if cls not in instances:
+            instances[cls] = cls(*args, **kwargs)
+        return instances[cls]
+
+    return wrapper

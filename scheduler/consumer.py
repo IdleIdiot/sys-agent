@@ -17,11 +17,19 @@ def callback(ch, method, properties, body: bytes):
     # 接受消息后写入 elasticsearch
     data_items = json.loads(body.decode("utf-8"))
     logger.info(f"Received {data_items}")
+
+    wait_delete = []
+
     for index_name, data_item in data_items.items():
         if data_item:
+            if index_name not in wait_delete:
+                wait_delete.append(index_name)
             client.create_index(index_name=index_name)
             client.bulk_index_documents(index_name, data_item)
             logger.info(f"Storage: {data_item}")
+
+    for index_name in wait_delete:
+        client.delete_old_data(index_name=index_name)
     # ch.basic_ack(delivery_tag=method.delivery_tag)
 
 
