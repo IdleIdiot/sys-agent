@@ -228,9 +228,8 @@ class LinuxSniffApi:
                 used = float(output[1].replace(" MiB", ""))
                 total = float(output[2].replace(" MiB", ""))
                 percent_gpu_mem_used = round(used / total, 4) * 100
-                print(percent_gpu_mem_used)
                 break
-        if not percent_gpu_mem_used:
+        if percent_gpu_mem_used is None:
             raise Exception(f"Not have gpu {gpu_id} in this machine")
         return {"value1": percent_gpu_mem_used}
 
@@ -239,7 +238,7 @@ class LinuxSniffApi:
         """
         If gpu_id not exists, raise Exception.
         """
-        percent_gpu_mem_used = None
+        percent_gpu_power_used = None
         cmd = (
             "nvidia-smi --query-gpu=index,power.draw,power.limit --format=noheader,csv"
         )
@@ -258,9 +257,8 @@ class LinuxSniffApi:
                 used = float(output[1].replace(" W", ""))
                 total = float(output[2].replace(" W", ""))
                 percent_gpu_power_used = round(used / total, 4) * 100
-                print(percent_gpu_power_used)
                 break
-        if not percent_gpu_power_used:
+        if percent_gpu_power_used is None:
             raise Exception(f"Not have gpu {gpu_id} in this machine")
         return {"value1": percent_gpu_power_used}
 
