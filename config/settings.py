@@ -68,23 +68,63 @@ items_mapper = {
         "alias": "gpu_3_mem",
     },
     "2005": {
+        "func": LinuxSniffApi.get_gpu_mem,
+        "args": "4",
+        "alias": "gpu_4_mem",
+    },
+    "2006": {
+        "func": LinuxSniffApi.get_gpu_mem,
+        "args": "5",
+        "alias": "gpu_5_mem",
+    },
+    "2007": {
+        "func": LinuxSniffApi.get_gpu_mem,
+        "args": "6",
+        "alias": "gpu_6_mem",
+    },
+    "2008": {
+        "func": LinuxSniffApi.get_gpu_mem,
+        "args": "7",
+        "alias": "gpu_7_mem",
+    },
+    "2021": {
         "func": LinuxSniffApi.get_gpu_power,
         "args": "0",
         "alias": "gpu_0_power",
     },
-    "2006": {
+    "2022": {
         "func": LinuxSniffApi.get_gpu_power,
         "args": "1",
         "alias": "gpu_1_power",
     },
-    "2007": {
+    "2023": {
         "func": LinuxSniffApi.get_gpu_power,
         "args": "2",
         "alias": "gpu_2_power",
     },
-    "2008": {
+    "2024": {
         "func": LinuxSniffApi.get_gpu_power,
         "args": "3",
         "alias": "gpu_3_power",
+    },
+    "2025": {
+        "func": LinuxSniffApi.get_gpu_power,
+        "args": "4",
+        "alias": "gpu_4_power",
+    },
+    "2026": {
+        "func": LinuxSniffApi.get_gpu_power,
+        "args": "5",
+        "alias": "gpu_5_power",
+    },
+    "2027": {
+        "func": LinuxSniffApi.get_gpu_power,
+        "args": "6",
+        "alias": "gpu_6_power",
+    },
+    "2028": {
+        "func": LinuxSniffApi.get_gpu_power,
+        "args": "7",
+        "alias": "gpu_7_power",
     },
 }
