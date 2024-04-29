@@ -67,3 +67,6 @@ nohup python app.py &
 ps -aux | grep app
 
 kill {pid}
+
+
+On my way.
