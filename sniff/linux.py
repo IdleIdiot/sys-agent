@@ -262,6 +262,30 @@ class LinuxSniffApi:
             raise Exception(f"Not have gpu {gpu_id} in this machine")
         return {"value1": percent_gpu_power_used}
 
+    @classmethod
+    def get_npu_mem(cls, device_id):
+        cmd = """
+        npu-smi info | awk 'NR>6{print $3,$8,$10}' | grep ^[0-9].*[0-9]$
+        """
+        result = subprocess.run(
+            cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
+        )
+        percent_npu_mem_used = 0
+        outputs = result.stdout.decode("utf-8").split("\n")
+        for output in outputs:
+            if not output:
+                continue
+            d_id, npu_mem_used, npu_mem_total = output.split(" ")
+            d_id = int(d_id)
+            device_id = int(device_id)
+
+            if d_id == device_id:
+                percent_npu_mem_used = round(
+                    float(npu_mem_used) / float(npu_mem_total) * 100, 2
+                )
+
+        return {"value1": percent_npu_mem_used}
+
 
 if __name__ == "__main__":
     LinuxSniffApi.get_gpu_mem("2")
