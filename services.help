@@ -1,9 +1,25 @@
+# /etc/docker/daemon.json
+{
+"registry-mirrors": [
+        "https://docker.m.daocloud.io",
+    "https://noohub.ru",
+    "https://huecker.io",
+    "https://dockerhub.timeweb.cloud"
+],
+"data-root": "/data/docker.lib"
+}
+
+
+# docker
+docker pull rabbitmq elasticsearch
+
+# docker run 
+
 docker run -d --name=rabbitmq -v /data/rabbitmq:/var/lib/rabbitmq -p 15672:15672 -p 5672:5672 -e RABBITMQ_DEFAULT_USER=rabbit-user -e RABBITMQ_DEFAULT_PASS=123456 rabbitmq:management
-
-
 
 docker run -d --name es -p 9200:9200 -p 9300:9300 --privileged -e "discovery.type=single-node" -e "ES_JAVA_OPTS=-Xms512m -Xmx512m" elasticsearch:7.17.20
 
+# validate
 
 curl -X POST "http://10.121.177.70:9200/_msearch" -H "Content-Type: application/x-ndjson" -d '
 { "index": "resource" }
