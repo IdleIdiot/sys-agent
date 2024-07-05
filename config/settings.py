@@ -12,7 +12,7 @@ from sniff.linux import LinuxSniffApi
 
 message_queue = {
     "rabbitmq": {
-        "host": "10.121.177.70",
+        "host": "10.121.177.134",
         "port": "5672",
         "queue": "server-test",
         "username": "rabbit-user",
@@ -23,7 +23,7 @@ message_queue = {
 
 database = {
     "elasticsearch": {
-        "ip": "10.121.177.70",
+        "ip": "10.121.177.134",
         "port": 9200,
         "user": "",
         "pwd": "",
