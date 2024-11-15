@@ -7,30 +7,32 @@
 
 若希望在低版本运行，安装依赖时将 requirements.txt 中的版本限制移除再次安装尝试既可
 
+```
 python --version
 
 Python 3.9.19
 
-pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
-
+pip install -r requirements.txt
+```
 
 
 
 ### 1.2 配置 Host ID
 修改 settings.py 文件
 
-vim config/settings.py
+`vim config/settings.py`
 
 将监控项1000中的参数 args 更改为你的网卡名称
 
-Set 1000 item args to your server nic.
+```
+## Set 1000 item args to your server nic.
 
 "1000": {
     "func": CommonSniffApi.get_ip_address,
     "args": "ens2f0",
     "alias": "host_id",
-},
-
+}
+```
 
 
 
@@ -43,9 +45,9 @@ Set 1000 item args to your server nic.
 #### 1.3.1 Config
 **修改配置文件中的数据库和消息队列的服务IP**
 
-vim config/settings.py
+`vim config/settings.py`
 
-例如：10.121.177.161 中存在已经部署的好的数据库和消息队列服务，将 IP 信息修改即可
+例如：`10.121.177.161` 中存在已经部署的好的数据库和消息队列服务，将 IP 信息修改即可
 
 ```
 message_queue = {
@@ -79,20 +81,20 @@ database = {
 3. 修改 task.py 
 
 
-## 2. 监控代理运行
+### 1.5. 监控代理运行
 添加好自定义监控项后，挂在系统后台运行程序
 
 cd client
-nohup python app.py &
+nohup python app.py --task_name custom_task &
 
 
-## 3. 停止运行
+### 1.6. 停止运行
 ps -aux | grep app
 
 kill {pid}
 
 
-## 4. Server 服务部署
+## 2. Server 服务部署
 docker compose up -d
 
 
