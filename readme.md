@@ -1,4 +1,4 @@
-## 1. 环境搭建
+## 1. Client 代理部署
 
 
 ### 1.1 Python
@@ -52,9 +52,9 @@ message_queue = {
     "rabbitmq": {
         "host": "10.121.177.161",
         "port": "5672",
-        "queue": "server-test",
-        "username": "rabbit-user",
-        "passwd": "123456",
+        "queue": "",
+        "username": "",
+        "passwd": "",
     },
 }
 
@@ -73,16 +73,10 @@ database = {
 
 
 ### 1.4 如何添加一个新的监控任务
-见下方MR链接，一个新监控项的提交
-
-[How to add GPU power](http://10.121.176.191:8280/automation/sys-agent/-/commit/4ec0764568a2ea1bbd8fc2b65ac7dfc45a058d0f#)
-
-
 添加新的监控项仅需要三个步骤
 1. 添加接口在 sniff 目录下
 2. 配置 settings.py 文件
 3. 修改 task.py 
-
 
 
 ## 2. 监控代理运行
@@ -96,3 +90,10 @@ nohup python app.py &
 ps -aux | grep app
 
 kill {pid}
+
+
+## 4. Server 服务部署
+docker compose up -d
+
+
+![界面展示](static/monitor.png)
