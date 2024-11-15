@@ -1,7 +1,13 @@
-## 1. Client 代理部署
 
 
-### 1.1 Python
+## 1. Server 服务部署
+docker compose up -d
+
+
+![界面展示](static/monitor.png)
+
+## 2. Client 代理部署
+### 2.1 Python
 
 建议 Python 版本为 3.9以上，若低于该版本，依赖库的安装可能没有对应的版本
 
@@ -17,7 +23,7 @@ pip install -r requirements.txt
 
 
 
-### 1.2 配置 Host ID
+### 2.2 配置 Host ID
 修改 settings.py 文件
 
 `vim config/settings.py`
@@ -36,13 +42,7 @@ pip install -r requirements.txt
 
 
 
-### 1.3 配置数据库和消息队列服务 Database & MQ
-如果已经有搭建好的服务，不用再重新部署服务
-
-如果没有服务，可以参考 services.help 中的命令，部署服务
-
-
-#### 1.3.1 Config
+### 2.3 配置数据库和消息队列服务 Database & MQ
 **修改配置文件中的数据库和消息队列的服务IP**
 
 `vim config/settings.py`
@@ -71,31 +71,17 @@ database = {
 }
 ```
 
-**自定义监控任务**
-
-
-### 1.4 如何添加一个新的监控任务
+### 2.4 自定义监控任务
 添加新的监控项仅需要三个步骤
 1. 添加接口在 sniff 目录下
 2. 配置 settings.py 文件
-3. 修改 task.py 
+3. 修改 task.py 将新任务添加到任务列表
 
 
-### 1.5. 监控代理运行
+### 2.5. 监控代理运行
 添加好自定义监控项后，挂在系统后台运行程序
 
 cd client
 nohup python app.py --task_name custom_task &
 
 
-### 1.6. 停止运行
-ps -aux | grep app
-
-kill {pid}
-
-
-## 2. Server 服务部署
-docker compose up -d
-
-
-![界面展示](static/monitor.png)
