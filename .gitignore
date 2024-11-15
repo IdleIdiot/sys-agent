@@ -1,0 +1,9 @@
+logs/
+*.pyc
+*.log
+nohup.out
+.vscode
+esdata
+es/
+grafana/
+test.py

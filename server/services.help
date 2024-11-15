@@ -1,0 +1,4 @@
+# validate
+
+curl -X DELETE "http://localhost:9200/resources"
+curl -X POST "http://10.121.177.161:9200/resources-*/_search" -H "Content-Type: application/x-ndjson" -d '{ "query": { "match_all": {} }, "size": 10 }'

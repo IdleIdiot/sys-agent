@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq_container
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbit-user
+      RABBITMQ_DEFAULT_PASS: 123456
+    ports:
+      - "5672:5672"
+      - "15672:15672" # Management UI port
+
+  elasticsearch:
+    image: elasticsearch:7.17.20
+    container_name: elasticsearch_container
+    environment:
+      discovery.type: single-node # 单节点模式适用于开发环境，生产环境中应使用集群配置。
+    volumes:
+      - ./es/data:/usr/share/elasticsearch/data # 持久化存储数据目录到宿主机上。
+    ports:
+      - "9200:9200"
+    
+  # kibana:
+  #   image: kibana:7.17.20 
+  #   container_name: kibana_container  
+  #   environment :
+  #     ELASTICSEARCH_URL : http://elasticsearch:9200 
+  #   depends_on :
+  #     - elasticsearch 
+  #   ports :
+  #     - "5601:5601"
+  
+  logstash:
+    image: logstash:7.17.20
+    container_name: logstash_container
+    volumes:
+      - ./logstash/config:/usr/share/logstash/pipeline/
+    ports:
+      - "9600:9600"
+      - "5044:5044"
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana_container
+    volumes:
+      - ./grafana:/var/lib/grafana/
+    ports :
+      - "9527:3000"
